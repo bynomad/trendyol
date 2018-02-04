@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Applications Config List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+    <form th:action="@{|/config/addConfig|}" th:object="${config}" method="post">
+        <div class="form-group">
+            <label class="control-label" th:for="appliceationName">Application Name</label>
+            <input class="form-control" th:field="*{applicationName}" type="text"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" th:for="name">Name</label>
+            <input class="form-control" th:field="*{name}" type="text"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" th:for="type">Type</label>
+            <select class="form-control" th:field="*{type}" id="configType" name="configType">
+                <option th:each="configType : ${configTypes}"
+                        th:value="${configType.type()}"
+                        th:text="${configType.type()}"/>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" th:for="value">Value</label>
+            <input class="form-control" th:field="*{value}" type="text"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" th:for="isActive">IsActive</label>
+            <select class="form-control" th:field="*{isActive}">
+                <option th:value="1">Active</option>
+                <option th:value="0">Pasif</option>
+            </select>
+        </div>
+        <div class="form-group submit-cancel">
+            <input class="btn btn-primary" type="submit" value="Save changes"/>
+            <a class="btn btn-default btn-cancel" th:href="@{/config/list}">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>
